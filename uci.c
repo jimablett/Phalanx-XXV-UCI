@@ -258,10 +258,8 @@ void uci_send_bestmove(tmove m, tmove ponder, int real_move) {
 
         // Add promotion piece if present
         if (m.in2a != m.in1) {
-            int promoted_piece = m.in2a >> 4;
-            if (promoted_piece >= QUEEN && promoted_piece <= KNIGHT) {
-                *p++ = tolower(piece[promoted_piece]);
-            }
+            int promoted_piece = (m.in2a >> 4) & 0xF;
+            *p++ = tolower(piece[promoted_piece]);
         }
         *p = '\0';
     }
